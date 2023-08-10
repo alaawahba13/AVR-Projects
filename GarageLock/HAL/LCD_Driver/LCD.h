@@ -7,20 +7,28 @@
 
 #ifndef LCD_H_
 #define LCD_H_
-#include <C:/Users/Qebaa/OneDrive/Documents/eclipse-workspace/Garage_System/Atmega32/inc/DIO.h>
+#include "../../Atmega32/inc/DIO.h"
 #include <util/delay.h>
 #include "../../Library/BIT_MATH.h"
+#include "string.h"
 
 /*This is used for lcd data pins D0-D7 */
-#define LCD_PORT 				PORTA
-#define LCD_DDR  				DDRA
+#define LCD_PORT 				PORTB
+#define LCD_DDR  				DDRB
+
+
+#define D4 						PIN_0
+#define D5 						PIN_1
+#define D6 						PIN_2
+#define D7 						PIN_4
+
+
 /* This is used for three control pins RS, RW, Enable */
-#define LCD_CONTROL_PORT 		PORTB
-#define LCD_CONTROL_DDR  		DDRB
+#define LCD_CONTROL_PORT 		PORTA
+#define LCD_CONTROL_DDR  		DDRA
 // define the three control pins connected to MCU
-#define ENABLE_SWITCH			3
-#define ReadWrite				2
-#define REGISTER_SELECT         1
+#define ENABLE_SWITCH			2
+#define REGISTER_SELECT         3
 
 //#define EIGHT_BIT_MODE
 #define FOUR_BIT_MODE

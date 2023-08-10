@@ -12,19 +12,24 @@
 #include "../../Library/BIT_MATH.h"
 
 //Define the PORT , PIND & DDR register connected to keypad
-#define Keypad_PORT   		PORTC
-#define Keypad_DDR			DDRC
-#define Keypad_PIN 			PINC
+#define Keypad_Row_PORT   		PORTC
+#define Keypad_COL_PORT   		PORTD
+
+#define Keypad_ROW_DDR			DDRC
+#define Keypad_COL_DDR			DDRD
+
+#define Keypad_ROW_PIN 		    	PINC
 
 // Define the Keypad Cols & Rows pins
-#define R0 					0
-#define R1					1
-#define R2 					2
-#define R3					3
-#define C0 					4
-#define C1					5
-#define C2 					6
-#define C3					7
+#define R0 					5
+#define R1					4
+#define R2 					3
+#define R3					2
+
+#define C0 					7
+#define C1					6
+#define C2 					5
+#define C3					3
 
 
 void Keypad_init();
