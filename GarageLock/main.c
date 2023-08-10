@@ -16,62 +16,21 @@ char pass[5];
 const char my_pass[] = "1234";
 int i = 0, count = 0;
 
-int main(void) {
-
-	lcd_init();
-	Keypad_init();
-	DIO_initPin(PIN_0, PORT_A, OUTPUT);
-	DIO_initPin(PIN_1, PORT_A, OUTPUT);
-	DIO_initPin(PIN_2, PORT_A, OUTPUT);
-
-	lcd_send_String("Enter Password: ");
-	char key;
-
-	while (1) {
-		key = Keypad_Get_Key();
-		if (key == '?') {
-			lcd_Clear_Screen();
-		} else if (key == 'A') {
-
-		} else {
-			lcd_Send_Char('*');
-			pass[i] = key;
-			i++;
-			if (i == 4) {
-				if (strcmp(pass, my_pass) == 0) {
-					motor_direction();
-					clc_screen();
-					count = 0;
-				} else {
-					count++;
-					check_count(count);
-					lcd_Clear_Screen();
-					lcd_send_String("Wrong Password");
-					_delay_ms(1000);
-					clc_screen();
-
-				}
-			}
-		}
-
-	}
-
-	return 0;
-}
 
 void Forward() {
-	DIO_WritePin(PIN_1, PORT_A, HIGH);
-	DIO_WritePin(PIN_2, PORT_A, LOW);
+	DIO_WritePin(PIN_5, PORT_B, HIGH);
+	DIO_WritePin(PIN_6, PORT_B, HIGH);
+
 
 }
 void backward() {
-	DIO_WritePin(PIN_2, PORT_A, HIGH);
-	DIO_WritePin(PIN_1, PORT_A, LOW);
+	DIO_WritePin(PIN_5, PORT_B, LOW);
+	DIO_WritePin(PIN_6, PORT_B, HIGH);
+
 
 }
 void stop() {
-	DIO_WritePin(PIN_2, PORT_A, LOW);
-	DIO_WritePin(PIN_1, PORT_A, LOW);
+	DIO_WritePin(PIN_6, PORT_B, LOW);
 }
 void motor_direction() {
 	int flag = 1;
@@ -104,9 +63,9 @@ void check_count(int count) {
 		lcd_Clear_Screen();
 		lcd_send_String("MAX COUNT");
 		while (1) {
-			DIO_WritePin(PIN_0, PORT_A, HIGH);
+			DIO_WritePin(PIN_7, PORT_B, HIGH);
 			_delay_ms(500);
-			DIO_WritePin(PIN_0, PORT_A, LOW);
+			DIO_WritePin(PIN_7, PORT_B, LOW);
 			_delay_ms(500);
 		}
 	}
@@ -119,3 +78,49 @@ void clc_screen() {
 	memset(pass, 0, strlen(pass));
 
 }
+
+int main(void) {
+
+	lcd_init();
+	Keypad_init();
+	DIO_initPin(PIN_7, PORT_B, OUTPUT);
+	DIO_initPin(PIN_5, PORT_B, OUTPUT);
+	DIO_initPin(PIN_6, PORT_B, OUTPUT);
+
+
+
+	lcd_send_String("Enter Password: ");
+	char key;
+
+	while (1) {
+		key = Keypad_Get_Key();
+		if (key == '?') {
+			lcd_Clear_Screen();
+		} else if (key == 'A') {
+
+		} else {
+			lcd_Send_Char(key);
+			pass[i] = key;
+			i++;
+			if (i == 4) {
+				if (strcmp(pass, my_pass) == 0) {
+					motor_direction();
+					clc_screen();
+					count = 0;
+				} else {
+					count++;
+					check_count(count);
+					lcd_Clear_Screen();
+					lcd_send_String("Wrong Password");
+					_delay_ms(1000);
+					clc_screen();
+
+				}
+			}
+		}
+
+	}
+
+	return 0;
+}
+
