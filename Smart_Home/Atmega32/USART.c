@@ -13,8 +13,11 @@ static uint8 *RX_str;
 void USART_init(void) {
 	/*   Baud rate   */
 	// For 9600 bps
-	UBRRL = 51;
-	CLEAR(UCSRA, U2X);
+	uint16 ubrr_value = (uint16)(((F_CPU / (9600 * 16UL))) - 1);;
+	//UCSRA = (1<<U2X);
+
+	UBRRH = ubrr_value>>8;
+	UBRRL = ubrr_value;
 
 	/*  FRAME 	  */
 	//This bit selects  Asynchronous
@@ -25,9 +28,9 @@ void USART_init(void) {
 	//This bit selects the number of Stop Bits to be inserted by the Transmitter (1 bit)
 	CLEAR(UCSRC, USBS);
 	// sets the number of data bits (8 bits by default)
-	SET(UCSRC, UCSZ1);
-	SET(UCSRC, UCSZ0);
 	CLEAR(UCSRB, UCSZ2);
+	UCSRC = (1<<URSEL) | (1<<UCSZ0) | (1<<UCSZ1);
+
 	/*   Enable  */
 	SET(UCSRB, RXEN);	//Writing this bit to one enables The USART Receiver.
 	SET(UCSRB, TXEN);	//Writing this bit to one enables The USART Transmitter.
@@ -159,7 +162,7 @@ void __vector_13(void) {
 	if (RX_str[i] == Default_Stop) {
 		RX_str[i] = '\0';
 		flag_rec = 1;
-		//USART_RX_interrupt_Disable();
+		USART_RX_interrupt_Disable();
 
 	}
 	i++;
