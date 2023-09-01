@@ -63,7 +63,7 @@ https://github.com/alaawahba13/AVR-Projects/assets/101985923/2b80d0d2-7304-4267-
   
  ## Hardware 
  
-    to be implemented
+    https://drive.google.com/file/d/1qaf56CY_-kIVj_D5ZhLVknjAH4-dEX6W/view?usp=drive_link 
     
  ## UML Diagram
     to be implemented
