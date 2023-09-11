@@ -62,9 +62,8 @@ https://github.com/alaawahba13/AVR-Projects/assets/101985923/2b80d0d2-7304-4267-
    - Monitor the system for fire alarms (triggered by smoke detection).
   
  ## Hardware 
- 
-    to be implemented
-    
+  [Full Video](https://drive.google.com/file/d/1qaf56CY_-kIVj_D5ZhLVknjAH4-dEX6W/view?usp=drive_link)
+            
  ## UML Diagram
     to be implemented
     
